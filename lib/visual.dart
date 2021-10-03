@@ -59,8 +59,8 @@ class _VisualState extends State<Visual> {
   ];
 
   int _currentSliderValue = 100;
-  int speed = 0;
-  int active = -1;
+  int speed = 100;
+  
   _updateArrayWithDelay(List<int> updatedArr) async {
     await Future.delayed(Duration(milliseconds: speed), () {
       setState(() {
@@ -102,7 +102,7 @@ class _VisualState extends State<Visual> {
           minIndex = j;
         }
       }
-      
+
       temp = selectArr[i];
       selectArr[i] = selectArr[minIndex];
       selectArr[minIndex] = temp;
@@ -123,7 +123,7 @@ class _VisualState extends State<Visual> {
     for (int i = 1; i < insertArr.length; i++) {
       key = insertArr[i];
       j = i - 1;
-      active = key;
+
       while (j >= 0 && insertArr[j] > key) {
         insertArr[j + 1] = insertArr[j];
         j = j - 1;
@@ -390,13 +390,13 @@ class _VisualState extends State<Visual> {
                       Slider(
                         value: _currentSliderValue.toDouble(),
                         min: 100,
-                        max: 300,
+                        max: 1000,
                         divisions: 2,
                         label: _currentSliderValue.round().toString(),
                         onChanged: (double value) {
                           setState(() {
                             _currentSliderValue = value.toInt();
-                            speed = (1/value.toInt())*10000 as int;
+                            speed = ((1/value)*10000).toInt();
                           });
                         },
                       )
@@ -413,7 +413,7 @@ class _VisualState extends State<Visual> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: arr
-                              .map((val) => _widget(val.toDouble(),val == active? Colors.green : Colors.white))
+                              .map((val) => _widget(val.toDouble()))
                               .toList()),
                       SizedBox(height: 20,),
                       Container(
@@ -459,7 +459,7 @@ class _VisualState extends State<Visual> {
     );
   }
 
-  Widget _widget(double h, Color color) {
+  Widget _widget(double h) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
@@ -469,7 +469,7 @@ class _VisualState extends State<Visual> {
             child: Text(h.toString()),
             alignment: Alignment.center,
           ),
-          decoration: BoxDecoration(color: color)),
+          decoration: BoxDecoration(color: Colors.white)),
     );
   }
 }
