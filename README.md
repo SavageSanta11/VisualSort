@@ -1,4 +1,4 @@
-# visual_sort
+# VisualSort
 
 An application that helps you visualize bubblesort, insertion sort, heapsort, mergesort and quicksort
 
