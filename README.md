@@ -1,6 +1,6 @@
 # visual_sort
 
-A new Flutter project.
+An application that helps you visualize bubblesort, insertion sort, heapsort, mergesort and quicksort
 
 ## Getting Started
 
